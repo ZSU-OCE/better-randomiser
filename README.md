@@ -1,6 +1,6 @@
 # BetterRandomiser Plugin
 
-The `BetterRandomiser` plugin is designed for Squad, using the SquadJS framework. It provides an automated system for randomising teams at the start of a new game, prioritising keeping squads intact. This plugin is ideal for preventing clan stacking.
+The `BetterRandomiser` plugin provides an automated system for randomising teams at the start of a new game, prioritising keeping squads intact. This plugin is ideal for preventing clan stacking.
 
 ## Features
 
@@ -13,11 +13,11 @@ The `BetterRandomiser` plugin is designed for Squad, using the SquadJS framework
 
 - **Start Randomisation**: Initiates the team randomisation process.
   - Default Command: `!randomise`
-  - **Usage**: Admin types the command in the in-game admin chat to start the process.
+  - **Usage**: Type the command in the in-game admin chat to start the process.
 
 - **Stop Randomisation**: Cancels the scheduled team randomisation.
-  - Default Command: `!stoprandom`
-  - **Usage**: Admin types the command in the in-game admin chat to stop the process.
+  - Default Command: `!stoprandomise`
+  - **Usage**: Type the command in the in-game admin chat to stop the process.
 
 ## Configuration Options
 
