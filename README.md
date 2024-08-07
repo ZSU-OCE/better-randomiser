@@ -59,8 +59,3 @@ The following options can be configured in the plugin's configuration file:
   "alreadyScheduledMessage": "Team randomisation is already scheduled.",
   "notScheduledMessage": "Team randomisation has not been scheduled yet."
 }
-
-How to Use
-Initiate Team Randomisation: Use the configured command (default: !random) in the in-game admin chat.
-Stop Team Randomisation: Use the configured stop command (default: !stoprandom) in the in-game admin chat if you need to cancel the process.
-Observe Broadcasts: Players will receive notifications about the randomisation process and any cancellations.
