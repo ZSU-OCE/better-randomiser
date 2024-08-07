@@ -51,8 +51,8 @@ The following options can be configured in the plugin's configuration file:
 {
   "plugin": "BetterRandomiser",
   "enabled": true,
-  "command": "random",
-  "stopCommand": "stoprandom",
+  "command": "randomise",
+  "stopCommand": "stoprandomise",
   "startBroadcast": "We will be shuffling teams at the start of next game. We will attempt to keep you together with your squad, but this isn't guaranteed. This system is automated.",
   "stopBroadcast": "Team randomisation has been cancelled.",
   "warnPlayerMessage": "Initiating team randomise. You may be swapped.",
