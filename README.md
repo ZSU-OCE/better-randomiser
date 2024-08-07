@@ -44,6 +44,7 @@ The following options can be configured in the plugin's configuration file:
 - **notScheduledMessage**: The message sent to the player if team randomisation has not been scheduled yet.
   - **Default**: `Team randomisation has not been scheduled yet.`
 
+
 ## Example Configuration
 
 ```json
