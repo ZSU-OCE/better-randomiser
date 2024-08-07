@@ -275,8 +275,6 @@ export default class BetterRandomiser extends BasePlugin {
 
     this.savedTeams = newTeams;
 
-    this.broadcast(this.options.startBroadcast);
-
     this.verbose(1, `Updated squad list has been saved.`);
   }
 
