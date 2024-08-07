@@ -6,7 +6,7 @@ The `BetterRandomiser` plugin provides an automated system for randomising teams
 
 - **Squad Integrity**: Prioritises keeping squad members together during team randomisation.
 - **Stop Randomisation**: Admins can stop the scheduled team randomisation if necessary.
-- **Intervalled Updates**: Periodically updates the team list every 5 minutes until the new game starts.
+- **Intervalled Updates**: Periodically updates the team list at configurable intervals until the new game starts.
 - **Broadcasts**: Informs players about upcoming randomisations and cancellations via server broadcasts.
 - **Continuous Checking**: Checks and swaps players for 60 seconds after a new game starts to ensure they are in the correct teams. After 60 seconds, balances teams if needed.
 
@@ -14,11 +14,11 @@ The `BetterRandomiser` plugin provides an automated system for randomising teams
 
 - **Start Randomisation**: Initiates the team randomisation process.
   - Default Command: `!randomise`
-  - **Usage**: Admin types the command in the in-game admin chat to start the process.
+  - **Usage**: Type the command in the in-game admin chat to start the process.
 
 - **Stop Randomisation**: Cancels the scheduled team randomisation.
   - Default Command: `!stoprandomise`
-  - **Usage**: Admin types the command in the in-game admin chat to stop the process.
+  - **Usage**: Type the command in the in-game admin chat to stop the process.
 
 ## Configuration Options
 
@@ -59,6 +59,9 @@ The following options can be configured in the plugin's configuration file:
 - **totalCheckTime**: The total time in seconds to continue checking and swapping players after the new game starts.
   - **Default**: `60`
 
+- **updateSquadListInterval**: The interval time in minutes for updating the squad list periodically.
+  - **Default**: `5`
+
 ## Example Configuration
 
 ```json
@@ -77,5 +80,6 @@ The following options can be configured in the plugin's configuration file:
   "alreadyScheduledMessage": "Team randomisation is already scheduled.",
   "notScheduledMessage": "Team randomisation has not been scheduled yet.",
   "checkInterval": 5,
-  "totalCheckTime": 60
+  "totalCheckTime": 60,
+  "updateSquadListInterval": 5
 }

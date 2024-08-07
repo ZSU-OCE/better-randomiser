@@ -78,6 +78,11 @@ export default class BetterRandomiser extends BasePlugin {
         required: false,
         description: 'The total time in seconds to continue checking and swapping players after the new game starts.',
         default: 60
+      },
+      updateSquadListInterval: {
+        required: false,
+        description: 'The interval time in minutes for updating the squad list periodically.',
+        default: 5
       }
     };
   }
@@ -88,7 +93,7 @@ export default class BetterRandomiser extends BasePlugin {
     this.onStopCommand = this.onStopCommand.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
     this.updateSquadList = this.updateSquadList.bind(this);
-    this.savedTeams = null;
+    this.savedTeams = { 1: [], 2: [] }; // Initialize savedTeams
     this.updateInterval = null;
     this.intervalBroadcastInterval = null;
     this.checkInterval = null;
@@ -206,7 +211,7 @@ export default class BetterRandomiser extends BasePlugin {
     }
 
     await this.updateSquadList();
-    this.updateInterval = setInterval(this.updateSquadList, 300000); // Update every 5 minutes
+    this.updateInterval = setInterval(this.updateSquadList, this.options.updateSquadListInterval * 60000); // Update periodically
 
     if (this.options.enableStartBroadcast) {
       this.broadcast(this.options.startBroadcast);
@@ -219,7 +224,7 @@ export default class BetterRandomiser extends BasePlugin {
       ); // Interval broadcast every X minutes
     }
 
-    this.verbose(1, `Teams have been saved and will be updated every 5 minutes until the new game starts.`);
+    this.verbose(1, `Teams have been saved and will be updated every ${this.options.updateSquadListInterval} minutes until the new game starts.`);
     this.isScheduled = true;
   }
 
@@ -237,7 +242,7 @@ export default class BetterRandomiser extends BasePlugin {
     this.updateInterval = null;
     this.intervalBroadcastInterval = null;
     this.checkInterval = null;
-    this.savedTeams = null;
+    this.savedTeams = { 1: [], 2: [] };
     this.isScheduled = false;
 
     if (this.options.enableStopBroadcast) {
@@ -257,7 +262,7 @@ export default class BetterRandomiser extends BasePlugin {
   }
 
   async onNewGame() {
-    if (this.savedTeams) {
+    if (this.savedTeams && (this.savedTeams[1].length > 0 || this.savedTeams[2].length > 0)) {
       this.verbose(1, `Executing saved team randomisation immediately and checking for the next 60 seconds...`);
       clearInterval(this.updateInterval); // Stop updating the squad list
       clearInterval(this.intervalBroadcastInterval); // Stop interval broadcasts
@@ -320,11 +325,25 @@ export default class BetterRandomiser extends BasePlugin {
           return;
         }
 
-        await switchTeams();
+        // Check if players are on the correct team and swap if needed
+        const players = this.server.players.slice(0);
+        for (const player of this.savedTeams[1]) {
+          const serverPlayer = players.find(p => p.eosID === player.eosID);
+          if (serverPlayer && serverPlayer.teamID !== '1') {
+            await this.server.rcon.switchTeam(player.eosID);
+          }
+        }
+        for (const player of this.savedTeams[2]) {
+          const serverPlayer = players.find(p => p.eosID === player.eosID);
+          if (serverPlayer && serverPlayer.teamID !== '2') {
+            await this.server.rcon.switchTeam(player.eosID);
+          }
+        }
+
         elapsedTime += checkIntervalDuration;
       }, checkIntervalDuration);
 
-      this.savedTeams = null;
+      this.savedTeams = { 1: [], 2: [] };
       this.isScheduled = false;
     }
   }
