@@ -1,10 +1,10 @@
 import BasePlugin from './base-plugin.js';
 
-export default class BetterRandomizer extends BasePlugin {
+export default class BetterRandomiser extends BasePlugin {
   static get description() {
     return (
-      "The <code>TeamRandomizer</code> can be used to randomize teams. It's great for destroying clan stacks or for " +
-      'social events. It can be run by typing, by default, <code>!randomize</code> into in-game admin chat'
+      "The <code>TeamRandomiser</code> can be used to randomise teams. It's great for destroying clan stacks or for " +
+      'social events. It can be run by typing, by default, <code>!randomise</code> into in-game admin chat'
     );
   }
 
@@ -16,38 +16,38 @@ export default class BetterRandomizer extends BasePlugin {
     return {
       command: {
         required: false,
-        description: 'The command used to randomize the teams.',
-        default: 'randomize'
+        description: 'The command used to randomise the teams.',
+        default: 'randomise'
       },
       stopCommand: {
         required: false,
-        description: 'The command used to stop the randomization.',
-        default: 'stoprandomize'
+        description: 'The command used to stop the randomisation.',
+        default: 'stoprandomise'
       },
       startBroadcast: {
         required: false,
-        description: 'The message broadcasted when the team randomization is scheduled.',
+        description: 'The message broadcasted when the team randomisation is scheduled.',
         default: "We will be shuffling teams at the start of next game. We will attempt to keep you together with your squad, but this isn't guaranteed. This system is automated."
       },
       stopBroadcast: {
         required: false,
-        description: 'The message broadcasted when the team randomization is cancelled.',
-        default: "Team randomization has been cancelled."
+        description: 'The message broadcasted when the team randomisation is cancelled.',
+        default: "Team randomisation has been cancelled."
       },
       warnPlayerMessage: {
         required: false,
-        description: 'The message sent to warn players before team randomization.',
+        description: 'The message sent to warn players before team randomisation.',
         default: "Initiating team randomise. You may be swapped."
       },
       alreadyScheduledMessage: {
         required: false,
-        description: 'The message sent to the player if team randomization is already scheduled.',
-        default: "Team randomization is already scheduled."
+        description: 'The message sent to the player if team randomisation is already scheduled.',
+        default: "Team randomisation is already scheduled."
       },
       notScheduledMessage: {
         required: false,
-        description: 'The message sent to the player if team randomization has not been scheduled yet.',
-        default: "Team randomization has not been scheduled yet."
+        description: 'The message sent to the player if team randomisation has not been scheduled yet.',
+        default: "Team randomisation has not been scheduled yet."
       }
     };
   }
@@ -191,7 +191,7 @@ export default class BetterRandomizer extends BasePlugin {
 
     this.broadcast(this.options.stopBroadcast);
 
-    this.verbose(1, `Team randomization process has been cancelled.`);
+    this.verbose(1, `Team randomisation process has been cancelled.`);
   }
 
   async updateSquadList() {
@@ -297,7 +297,7 @@ export default class BetterRandomizer extends BasePlugin {
 
   async onNewGame() {
     if (this.savedTeams) {
-      this.verbose(1, `Executing saved team randomization in 20 seconds...`);
+      this.verbose(1, `Executing saved team randomisation in 20 seconds...`);
       clearInterval(this.updateInterval); // Stop updating the squad list
 
       setTimeout(async () => {

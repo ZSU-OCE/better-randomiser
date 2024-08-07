@@ -12,7 +12,7 @@ The `BetterRandomiser` plugin is designed for Squad, using the SquadJS framework
 ## Admin Commands
 
 - **Start Randomisation**: Initiates the team randomisation process.
-  - Default Command: `!random`
+  - Default Command: `!randomise`
   - **Usage**: Admin types the command in the in-game admin chat to start the process.
 
 - **Stop Randomisation**: Cancels the scheduled team randomisation.
@@ -24,10 +24,10 @@ The `BetterRandomiser` plugin is designed for Squad, using the SquadJS framework
 The following options can be configured in the plugin's configuration file:
 
 - **command**: The command used to initiate team randomisation.
-  - **Default**: `random`
+  - **Default**: `!randomise`
   
 - **stopCommand**: The command used to stop the team randomisation.
-  - **Default**: `stoprandom`
+  - **Default**: `!stoprandomise`
 
 - **startBroadcast**: The message broadcasted when the team randomisation is scheduled.
   - **Default**: `We will be shuffling teams at the start of next game. We will attempt to keep you together with your squad, but this isn't guaranteed. This system is automated.`
