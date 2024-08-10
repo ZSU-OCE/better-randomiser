@@ -440,7 +440,7 @@ export default class BetterRandomiser extends BasePlugin {
           );
 
           try {
-             await this.server.rcon.switchTeam(player.eosID); // Uncomment when running live
+            await this.server.rcon.switchTeam(player.eosID);
             await this.server.rcon.warn(
               player.eosID,
               this.options.swapWarningMessage
