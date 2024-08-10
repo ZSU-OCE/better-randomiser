@@ -114,7 +114,8 @@ export default class BetterRandomiser extends BasePlugin {
       },
       randomiseCompleteMessage: {
         required: false,
-        description: "The message sent to admins when randomisation is complete.",
+        description:
+          "The message sent to admins when randomisation is complete.",
         default:
           "Randomise completed\n| Swapped {swappedPlayers} players\n| Team 1: {team1Count} players\n| Team 2: {team2Count} players",
       },
@@ -122,6 +123,12 @@ export default class BetterRandomiser extends BasePlugin {
         required: false,
         description: "The message sent to admins if randomisation fails.",
         default: "!!!Randomise Failed!!!\n| Check SquadJS Logs",
+      },
+      resetRandomiserDelay: {
+        required: false,
+        description:
+          "Time in minutes after which the randomiser flag will be reset.",
+        default: 3,
       },
     };
   }
@@ -143,6 +150,7 @@ export default class BetterRandomiser extends BasePlugin {
 
   async mount() {
     this.active = false; // Set the active flag to false on plugin mount
+    this.server.randomiser = false; // Set the global value to false on startup
     this.server.on(`CHAT_COMMAND:${this.options.command}`, this.onChatCommand);
     this.server.on(
       `CHAT_COMMAND:${this.options.stopCommand}`,
@@ -156,6 +164,7 @@ export default class BetterRandomiser extends BasePlugin {
   }
 
   async unmount() {
+    this.server.randomiser = false; // Reset the global value when unmounting
     this.server.removeEventListener(
       `CHAT_COMMAND:${this.options.command}`,
       this.onChatCommand
@@ -327,6 +336,15 @@ export default class BetterRandomiser extends BasePlugin {
       this.verbose(1, "Team randomisation is not active, skipping onNewGame.");
       return;
     }
+    this.server.randomiser = true; // Set the global value to true during the shuffle
+
+    setTimeout(() => {
+      this.server.randomiser = false;
+      this.verbose(
+        1,
+        "Randomiser flag has been reset to false after the configured time."
+      );
+    }, this.options.resetRandomiserDelay * 60000);
 
     this.verbose(
       1,
@@ -501,7 +519,7 @@ export default class BetterRandomiser extends BasePlugin {
           1,
           `Balancing teams by moving unassigned player ${player.name}`
         );
-         await this.server.rcon.switchTeam(player.eosID); // Swap the unassigned player
+        await this.server.rcon.switchTeam(player.eosID); // Swap the unassigned player
       }
     }
   }

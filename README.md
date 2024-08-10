@@ -82,6 +82,9 @@ The following options can be configured in the plugin's configuration file:
 - **updateSquadListInterval**: The interval time in minutes for updating the squad list periodically.
   - **Default**: `5`
 
+- **updateSquadListInterval**: The interval time in minutes the global value is true(Used to disable !switch onNewGame).
+  - **Default**: `10`
+
 ## Example Configuration
 
 ```json
@@ -106,5 +109,6 @@ The following options can be configured in the plugin's configuration file:
   "randomiseFailedMessage": "!!!Randomise Failed!!!\n| Check SquadJS Logs",
   "checkInterval": 5,
   "totalCheckTime": 60,
-  "updateSquadListInterval": 5
+  "updateSquadListInterval": 5,
+  "resetRandomiserDelay": 10
 }
